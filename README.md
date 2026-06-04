@@ -11,31 +11,39 @@ flowchart TD
 
     Internet[Internet Users] --> ALB[Application Load Balancer / ALB Ingress]
 
-    ALB --> UI[UI Service]
-
     subgraph VPC[project-bedrock-vpc - us-east-1]
 
-        subgraph EKS[project-bedrock-cluster]
-
-            UI --> Catalog[Catalog Service]
-
-            UI --> Carts[Carts Service]
-
-            UI --> Checkout[Checkout Service]
-
-            Checkout --> Orders[Orders Service]
-
-            Checkout --> Redis[Redis Pod]
-
-            Orders --> RabbitMQ[RabbitMQ Pod]
-
+        subgraph PublicSubnets[Public Subnets]
+            ALB
         end
 
-        Catalog --> MySQL[(Amazon RDS MySQL)]
+        subgraph PrivateSubnets[Private Subnets]
 
-        Orders --> Postgres[(Amazon RDS PostgreSQL)]
+            ALB --> UI[UI Service]
 
-        Carts --> DynamoDB[(Amazon DynamoDB Items Table)]
+            subgraph EKS[project-bedrock-cluster]
+
+                UI --> Catalog[Catalog Service]
+
+                UI --> Carts[Carts Service]
+
+                UI --> Checkout[Checkout Service]
+
+                Checkout --> Orders[Orders Service]
+
+                Checkout --> Redis[Redis Pod]
+
+                Orders --> RabbitMQ[RabbitMQ Pod]
+
+            end
+
+            Catalog --> MySQL[(Amazon RDS MySQL)]
+
+            Orders --> Postgres[(Amazon RDS PostgreSQL)]
+
+            Carts --> DynamoDB[(Amazon DynamoDB Items Table)]
+
+        end
 
     end
 
@@ -50,7 +58,7 @@ flowchart TD
     DevUser --> AssetsBucket
 ```
 
-# Key Resources
+## Key Resources
 
 | Resource | Value |
 |---|---|
@@ -63,15 +71,16 @@ flowchart TD
 | IAM Developer User | `bedrock-dev-view` |
 
 
-# Application URL
+## Application URL
 
 Retail Store URL:
 
 ```text
 http://k8s-retailap-retailap-3c6aa53d7a-836497109.us-east-1.elb.amazonaws.com
 ```
+The application is exposed through an AWS Application Load Balancer (ALB) Ingress Controller.
 
-# Data Layer
+## Data Layer
 
 The application uses managed AWS services for persistence:
 
@@ -82,14 +91,14 @@ The application uses managed AWS services for persistence:
 
 ---
 
-# Observability
+## Observability
 
 - EKS control plane logging is enabled.
 - Amazon CloudWatch Observability Add-on is installed.
 - Fluent Bit and CloudWatch agents are running in the `amazon-cloudwatch` namespace.
 - Lambda logs are available in CloudWatch Logs.
 
-# Serverless Extension
+## Serverless Extension
 
 Product image uploads are handled through:
 
@@ -101,7 +110,7 @@ Test upload confirmed Lambda log:
 Image received: test-image.txt from bucket: bedrock-assets-ese-715398629827
 ```
 
-# Secure Developer Access
+## Secure Developer Access
 
 IAM user `bedrock-dev-view` has:
 
@@ -124,7 +133,7 @@ kubectl delete pod <pod-name> -n retail-app
 Result: ❌ Denied
 
 
-# CI/CD
+## CI/CD
 
 GitHub Actions workflow:
 
@@ -136,11 +145,11 @@ GitHub Actions workflow:
 
 * Pull Request to `main` runs `terraform plan`
 * Terraform plan output is posted as a PR comment
-* Push/Merge to `main` runs `terraform apply`
+* Push or Merge to `main` runs `terraform apply`
 * AWS credentials are stored securely as GitHub repository secrets
 
 
-# Grading Output
+## Grading Output
 
 The required grading file has been generated and committed:
 
@@ -156,7 +165,7 @@ It includes:
 * `vpc_id`
 * `assets_bucket_name`
 
-# Deployment Commands
+## Deployment Commands
 
 ```bash
 git add README.md

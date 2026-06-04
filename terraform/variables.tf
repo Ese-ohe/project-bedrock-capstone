@@ -13,6 +13,6 @@ variable "cluster_name" {
 variable "assets_bucket_name" {
   description = "S3 bucket for uploaded product assets"
   type        = string
-  default     = "bedrock-assets-ese-715398629827"
+  default     = "bedrock-assets-alt-soe-025-3140"
 
 }

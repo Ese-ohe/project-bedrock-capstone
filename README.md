@@ -49,7 +49,7 @@ flowchart TD
 
     EKS --> CloudWatch[CloudWatch Logs / Observability Add-on]
 
-    AssetsBucket[S3 Bucket: bedrock-assets-ese-715398629827] --> Lambda[Lambda: bedrock-asset-processor]
+    AssetsBucket[S3 Bucket: bedrock-assets-alt-soe-025-3140] --> Lambda[Lambda: bedrock-asset-processor]
 
     Lambda --> LambdaLogs[CloudWatch Lambda Logs]
 
@@ -66,7 +66,7 @@ flowchart TD
 | EKS Cluster | `project-bedrock-cluster` |
 | VPC | `project-bedrock-vpc` |
 | Namespace | `retail-app` |
-| S3 Bucket | `bedrock-assets-ese-715398629827` |
+| S3 Bucket | `bedrock-assets-alt-soe-025-3140` |
 | Lambda Function | `bedrock-asset-processor` |
 | IAM Developer User | `bedrock-dev-view` |
 
@@ -107,7 +107,7 @@ S3 Bucket → Lambda Function → CloudWatch Logs
 Test upload confirmed Lambda log:
 
 ```text
-Image received: test-image.txt from bucket: bedrock-assets-ese-715398629827
+Image received: test-image.txt from bucket: bedrock-assets-alt-soe-025-3140
 ```
 
 ## Secure Developer Access

@@ -2,7 +2,7 @@
   "assets_bucket_name": {
     "sensitive": false,
     "type": "string",
-    "value": "bedrock-assets-ese-715398629827"
+    "value": "bedrock-assets-alt-soe-025-3140"
   },
   "cluster_endpoint": {
     "sensitive": false,

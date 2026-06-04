@@ -7,7 +7,6 @@ This project provisions a production-grade AWS EKS environment for the AWS Retai
 ## Architecture
 
 ```mermaid
-
 flowchart TD
 
     Internet[Internet Users] --> ALB[Application Load Balancer / ALB Ingress]
@@ -42,13 +41,14 @@ flowchart TD
 
     EKS --> CloudWatch[CloudWatch Logs / Observability Add-on]
 
-    S3[S3 Bucket: bedrock-assets-ese-715398629827] --> Lambda[Lambda: bedrock-asset-processor]
+    AssetsBucket[S3 Bucket: bedrock-assets-ese-715398629827] --> Lambda[Lambda: bedrock-asset-processor]
 
     Lambda --> LambdaLogs[CloudWatch Lambda Logs]
 
     DevUser[IAM User: bedrock-dev-view] --> EKS
 
-    DevUser --> S3
+    DevUser --> AssetsBucket
+```
 
 # Key Resources
 

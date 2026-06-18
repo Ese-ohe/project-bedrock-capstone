@@ -197,7 +197,7 @@ Expected result:
 Open the ALB URL in a browser:
 
 ```text
-http://k8s-retailap-retailap-3c6aa53d7a-836497109.us-east-1.elb.amazonaws.com
+http://k8s-retailap-retailap-3c6aa53d7a-826936519.us-east-1.elb.amazonaws.com
 ```
 
 Verify:

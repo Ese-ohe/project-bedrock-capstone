@@ -76,7 +76,7 @@ flowchart TD
 Retail Store URL:
 
 ```text
-http://k8s-retailap-retailap-3c6aa53d7a-836497109.us-east-1.elb.amazonaws.com
+http://k8s-retailap-retailap-3c6aa53d7a-826936519.us-east-1.elb.amazonaws.com
 ```
 The application is exposed through an AWS Application Load Balancer (ALB) Ingress Controller.
 
